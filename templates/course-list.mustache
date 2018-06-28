@@ -1,0 +1,74 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_myoverview_enva/course-list
+
+    This template renders the list of courses
+
+    Example context (json):
+    {
+        "courses": [
+            {
+                 "fullname": "My test course fullname",
+                 "summary": "Sumary text goes here...",
+                 "viewurl": "http://xxx/course/view.php?id=courseid"
+                 "progress": 60,
+                 "hasstarted": true,
+                 "tobereviewed": true,
+                 "visible": true
+            },
+            {
+                 "fullname": "My test course fullname 2",
+                 "summary": "Sumary text goes here...",
+                 "viewurl": "http://xxx/course/view.php?id=courseid"
+                 "progress": 60
+                 "hasstarted": true,
+                 "tobereviewed": false,
+                 "visible": true
+            }
+        ]
+    }
+}}
+<div id="block-myoverview-enva-{{uniqid}}" class="block-myoverview-enva" data-region="myoverview-enva">
+    {{#courses}}
+        <div class="col-lg-6">
+            <div class="card m-b-1 courses-view-course-item {{#tobereviewed}}markreview{{/tobereviewed}}" data-score="{{score}}">
+                <div class="card-block course-info-container" id="course-info-container-{{id}}">
+                    <div class="hidden-sm-up hidden-phone">
+                        <h4 class="h5"><a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">{{{fullname}}}</a></h4>
+                        {{> block_myoverview_enva/progress-bar}}
+                    </div>
+                    <div class="hidden-xs-down visible-phone">
+                        <div class="media">
+                            <div class="media-left">
+                                <div class="media-object">
+                                    {{> block_myoverview_enva/progress-bar}}
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="h5"><a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">{{{fullname}}}</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted">
+                        {{#shortentext}} 140, {{summary}}{{/shortentext}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    {{/courses}}
+</div>

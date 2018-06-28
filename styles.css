@@ -1,0 +1,14 @@
+.block_myoverview_enva .content div.coursetest-message {
+    text-align: center;
+}
+.block_myoverview_enva .content div.course-progressbar {
+    padding-top: 1em;
+}
+
+.block_myoverview_enva .content div.test-action {
+    text-align: center;
+}
+
+.block_myoverview_enva .content .markreview {
+    background: red;
+}

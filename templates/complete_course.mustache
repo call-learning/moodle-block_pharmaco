@@ -1,0 +1,35 @@
+{{!
+    @template block_myoverview_enva/complete_course
+
+    Display a message and link to the test course to complete
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+
+    Example context (json):
+    {
+        "fullname": "My test course fullname",
+        "viewurl": "http://xxx/course/view.php?id=courseid"
+        "progress": 60
+        "hasstarted": true
+    }
+}}
+<div id="block-myoverview-enva-{{uniqid}}" class="block-myoverview-enva" data-region="myoverview-enva">
+    <div class="coursetest-message">{{#str}}
+        testcourseneedscompletion, block_myoverview_enva, {{fullname}} {{/str}}</div>
+    {{> block_myoverview_enva/progress-bar }}
+    <div class="test-action">
+        <a href="{{viewurl}}" class="btn btn-secondary view-course">
+            {{#hasstarted}}
+                {{#str}} launchcourse:started, block_myoverview_enva {{/str}}
+            {{/hasstarted}}
+            {{^hasstarted}}
+                {{#str}} launchcourse:first, block_myoverview_enva {{/str}}
+            {{/hasstarted}}
+        </a>
+    </div>
+</div>
