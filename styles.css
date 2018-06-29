@@ -9,6 +9,10 @@
     text-align: center;
 }
 
-.block_myoverview_enva .content .markreview {
-    background: red;
+.block_myoverview_enva .content .recommended {
+    border-color: lightcoral;
+}
+
+.block_myoverview_enva .content .completed {
+    border-color: #00aa00;
 }

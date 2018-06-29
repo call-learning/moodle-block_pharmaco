@@ -17,16 +17,17 @@
 defined('MOODLE_INTERNAL') || die();
 
 class block_myoverview_enva_renderer extends plugin_renderer_base {
-
+    
     public function render_test_course_prompt(test_course_prompt $tp) {
         return $this->render_from_template('block_myoverview_enva/complete_course', $tp->export_for_template($this));
     }
+    
     public function render_ordered_course_list(ordered_course_list $cl) {
         return $this->render_from_template('block_myoverview_enva/course-list', $cl->export_for_template($this));
     }
 }
 
-class test_course_prompt implements  renderable, templatable {
+class test_course_prompt implements renderable, templatable {
     public $userid;
     public $course;
     
@@ -36,8 +37,8 @@ class test_course_prompt implements  renderable, templatable {
      * @param string $tab The tab to display.
      */
     public function __construct($userid, $course) {
-        $this->userid  = $userid;
-        $this->course  = $course;
+        $this->userid = $userid;
+        $this->course = $course;
     }
     
     /**
@@ -53,19 +54,19 @@ class test_course_prompt implements  renderable, templatable {
         if (!is_null($percentage)) {
             $percentage = floor($percentage);
         }
-    
+        
         if (!is_null($percentage)) {
             $percentage = floor($percentage);
         }
         $courselink = new action_link(
             new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $this->course->id)),
-            ($percentage == 0)? get_string('launchcourse:first','block_myoverview_enva'): get_string('launchcourse:started','block_myoverview_enva'));
-    
+            ($percentage == 0) ? get_string('launchcourse:first', 'block_myoverview_enva') : get_string('launchcourse:started', 'block_myoverview_enva'));
+        
         $contextdata = [
             'fullname' => $this->course->fullname,
-            'progress'=> $percentage,
+            'progress' => $percentage,
             'viewurl' => new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $this->course->id)),
-            'hasstarted'=> $percentage >0
+            'hasstarted' => $percentage > 0
         ];
         $contextdata += (array)$courselink->export_for_template($output);
         return $contextdata;
@@ -73,17 +74,18 @@ class test_course_prompt implements  renderable, templatable {
 }
 
 
-class ordered_course_list implements  renderable, templatable {
+class ordered_course_list implements renderable, templatable {
     public $userid;
     public $reviewthreshold;
+    
     /**
      * Constructor.
      *
      * @param string $tab The tab to display.
      */
     public function __construct($userid, $reviewthreshold) {
-        $this->userid  = $userid;
-        $this->reviewthreshold  = $reviewthreshold;
+        $this->userid = $userid;
+        $this->reviewthreshold = $reviewthreshold;
     }
     
     /**
@@ -94,7 +96,7 @@ class ordered_course_list implements  renderable, templatable {
      */
     public function export_for_template(renderer_base $output) {
         global $CFG;
-    
+        
         $ts = new \local_enva\tag_scores(\local_enva\helper::get_test_course_id(), $this->userid);
         $cl = new \local_enva\course_list_by_score($this->userid, $ts->compute());
         $courselist = $cl->get_list();
@@ -105,21 +107,26 @@ class ordered_course_list implements  renderable, templatable {
         $selectioncourseid = \local_enva\helper::get_test_course_id(); // We remove the test course from the list
         // and add it at the end
         $selectioncourse = null;
-        foreach ($courselist as $c)  {
+        foreach ($courselist as $c) {
             if ($c->id != $selectioncourseid) {
-                $c->viewurl = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $c->id));
-                $c->hasstarted = $c->progress > 0;
-                $c->tobreviewed = ($c->score < $this->reviewthreshold);
+                $this->set_course_data($c, $c->progress > 0, ($c->score < $this->reviewthreshold));
                 $courselistarray[] = (array)$c;
             } else {
-                $c->viewurl = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $c->id));
-                $c->hasstarted = true ;
-                $c->tobreviewed = false;
-                $c->visible = false;
+                $this->set_course_data($c, true, false);
                 $selectioncourse = $c;
             }
         }
         $courselistarray[] = $selectioncourse; // Add test course at the end
-        return array( 'courses' => $courselistarray );
+        return array('courses' => $courselistarray);
+    }
+    
+    protected function set_course_data(&$c, $hasstarted, $tobereviewed, $hide = false) {
+        global $CFG;
+        $c->viewurl = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $c->id));
+        $c->hasstarted = $hasstarted;
+        $c->tobereviewed = $tobereviewed;
+        if ($hide) {
+            $c->visible = false;
+        }
     }
 }
