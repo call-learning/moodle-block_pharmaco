@@ -19,7 +19,7 @@ defined('MOODLE_INTERNAL') || die();
 class block_myoverview_enva_renderer extends plugin_renderer_base {
     
     public function render_test_course_prompt(test_course_prompt $tp) {
-        return $this->render_from_template('block_myoverview_enva/complete_course', $tp->export_for_template($this));
+        return $this->render_from_template('block_myoverview_enva/complete-course', $tp->export_for_template($this));
     }
     
     public function render_ordered_course_list(ordered_course_list $cl) {
@@ -125,6 +125,8 @@ class ordered_course_list implements renderable, templatable {
         $c->viewurl = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $c->id));
         $c->hasstarted = $hasstarted;
         $c->tobereviewed = $tobereviewed;
+        $c->summary = html_to_text(format_text($c->summary ,$c->format ));
+        $c->progress = is_null($c->progress)?0:$c->progress;
         if ($hide) {
             $c->visible = false;
         }

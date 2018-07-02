@@ -44,31 +44,22 @@
     }
 }}
 <div id="block-myoverview-enva-{{uniqid}}" class="block-myoverview-enva" data-region="myoverview-enva">
-    {{#courses}}
-        <div class="col-lg-6">
-            <div class="card m-b-1 courses-view-course-item {{#tobereviewed}}recommended{{/tobereviewed}} {{#completed}}completed{{/completed}}" data-score="{{score}}" data-tags="{{#tags}}{{/tags}}">
-                <div class="card-block course-info-container" id="course-info-container-{{id}}">
-                    <div class="hidden-sm-up hidden-phone">
-                        <h4 class="h5"><a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">{{{fullname}}}</a></h4>
-                        {{> block_myoverview_enva/progress-bar}}
+    <ul class="hexagonal-grid">
+        {{#courses}}
+            <li class="hexagon"
+                id="course-info-exa-{{id}}">
+                <a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">
+                    <div class="hexagon{{#tobereviewed}} recommended{{/tobereviewed}}{{#completed}} completed{{/completed}}">
+                        <div class="hexagon-progress" style="width:{{progress}}%"></div>
+                        <span class="title">{{{fullname}}}</span>
+                        <p class="text-muted summary">
+                            {{#shortentext}} 100, {{summary}}{{/shortentext}}
+                        </p>
+                        <div class="progress-display">
+                            {{#str}}progressmessage, block_myoverview_enva, {{progress}} {{/str}}</div>
                     </div>
-                    <div class="hidden-xs-down visible-phone">
-                        <div class="media">
-                            <div class="media-left">
-                                <div class="media-object">
-                                    {{> block_myoverview_enva/progress-bar}}
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="h5"><a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">{{{fullname}}}</a></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-muted">
-                        {{#shortentext}} 140, {{summary}}{{/shortentext}}
-                    </p>
-                </div>
-            </div>
-        </div>
-    {{/courses}}
+                </a>
+            </li>
+        {{/courses}}
+    </ul>
 </div>

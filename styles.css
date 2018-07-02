@@ -1,6 +1,7 @@
 .block_myoverview_enva .content div.coursetest-message {
     text-align: center;
 }
+
 .block_myoverview_enva .content div.course-progressbar {
     padding-top: 1em;
 }
@@ -10,9 +11,186 @@
 }
 
 .block_myoverview_enva .content .recommended {
-    border-color: lightcoral;
+
 }
 
 .block_myoverview_enva .content .completed {
     border-color: #00aa00;
+}
+
+/* See https://www.codesmite.com/article/how-to-create-pure-css-hexagonal-grids */
+/* We define the hexagonal shape */
+.block_myoverview_enva ul.hexagonal-grid {
+    display: flex;
+    flex-wrap: wrap;
+    /*width: 60%;*/
+    margin: 0 auto;
+    padding: 0;
+    margin-bottom: 6.9285714285%;
+}
+
+
+.block_myoverview_enva ul.hexagonal-grid:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.block_myoverview_enva ul.hexagonal-grid li.hexagon {
+    list-style-type: none;
+    position: relative;
+    width: 27.85714285714286%;
+    padding: 0 0 32.16760145166612% 0;
+    -o-transform: rotate(-60deg) skewY(30deg);
+    -moz-transform: rotate(-60deg) skewY(30deg);
+    -webkit-transform: rotate(-60deg) skewY(30deg);
+    -ms-transform: rotate(-60deg) skewY(30deg);
+    transform: rotate(-60deg) skewY(30deg);
+    overflow: hidden;
+    visibility: hidden;
+    background: #fd005f;
+}
+
+.block_myoverview_enva ul.hexagonal-grid li * {
+    visibility: visible;
+}
+
+.block_myoverview_enva ul.hexagonal-grid li.hexagon div.hexagon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -o-transform: skewY(-30deg) rotate(60deg);
+    -moz-transform: skewY(-30deg) rotate(60deg);
+    -webkit-transform: skewY(-30deg) rotate(60deg);
+    -ms-transform: skewY(-30deg) rotate(60deg);
+    transform: skewY(-30deg) rotate(60deg);
+}
+
+
+/* Make sure hexagons are intertwinned */
+@media (min-width: 768px) {
+    .block_myoverview_enva ul.hexagonal-grid li:nth-child(3n+2) {
+        margin: 0 1%;
+    }
+
+    .block_myoverview_enva ul.hexagonal-grid li:nth-child(6n+4),
+    .block_myoverview_enva ul.hexagonal-grid li:nth-child(6n+5),
+    .block_myoverview_enva ul.hexagonal-grid li:nth-child(6n+6) {
+        margin-top: -6.9285714285%;
+        margin-bottom: -6.9285714285%;
+        -o-transform: translateX(50%) rotate(-60deg) skewY(30deg);
+        -moz-transform: translateX(50%) rotate(-60deg) skewY(30deg);
+        -webkit-transform: translateX(50%) rotate(-60deg) skewY(30deg);
+        -ms-transform: translateX(50%) rotate(-60deg) skewY(30deg);
+        transform: translateX(50%) rotate(-60deg) skewY(30deg);
+    }
+}
+.block_myoverview_enva ul.hexagonal-grid li:nth-child(6n+4) {
+    margin-left: 0.5%;
+}
+
+/* Basic responsiveness */
+@media (max-width: 767px) {
+    .block_myoverview_enva ul.hexagonal-grid li.hexagon {
+        width: 55.714285714%;
+        padding: 0 0 64.335202903% 0;
+    }
+    .block_myoverview_enva ul.hexagonal-grid li:nth-child(2n+1) {
+        margin: 0 1%;
+    }
+
+    .block_myoverview_enva ul.hexagonal-grid li:nth-child(4n+2),
+    .block_myoverview_enva ul.hexagonal-grid li:nth-child(4n+4) {
+        margin-top: -13.857142857%;
+        margin-bottom: -13.857142857%;
+        -o-transform: translateX(50%) rotate(-60deg) skewY(30deg);
+        -moz-transform: translateX(50%) rotate(-60deg) skewY(30deg);
+        -webkit-transform: translateX(50%) rotate(-60deg) skewY(30deg);
+        -ms-transform: translateX(50%) rotate(-60deg) skewY(30deg);
+        transform: translateX(50%) rotate(-60deg) skewY(30deg);
+    }
+}
+
+/* Background colors */
+.block_myoverview_enva ul.hexagonal-grid li.hexagon div.hexagon {
+    background-color: gold;
+}
+
+.block_myoverview_enva ul.hexagonal-grid li.hexagon div.hexagon {
+    background-color: lightgoldenrodyellow;
+}
+
+.block_myoverview_enva ul.hexagonal-grid li.hexagon div.hexagon.recommended {
+    background-color: lightcoral;
+}
+
+.block_myoverview_enva ul.hexagonal-grid li.hexagon div.hexagon.recommended:hover {
+    background-color: lightcoral;
+}
+
+.block_myoverview_enva ul.hexagonal-grid li.hexagon div.hexagon.completed {
+    background-color: skyblue;
+}
+.block_myoverview_enva ul.hexagonal-grid li.hexagon div.hexagon.completed:hover {
+    background-color: lightskyblue;
+}
+
+
+/* Content align */
+.block_myoverview_enva ul.hexagonal-grid li.hexagon div.hexagon span.title,
+.block_myoverview_enva ul.hexagonal-grid li.hexagon a:hover div.hexagon p.summary {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+
+.block_myoverview_enva ul.hexagonal-grid li.hexagon a div.hexagon span.title {
+    font-weight: bolder;
+    font-size: larger;
+}
+
+
+/* Behaviour when hovering */
+
+.block_myoverview_enva ul.hexagonal-grid li.hexagon a div.hexagon p.summary {
+    visibility: hidden;
+}
+.block_myoverview_enva ul.hexagonal-grid li.hexagon a:hover div.hexagon p.summary {
+    visibility: visible;
+}
+.block_myoverview_enva ul.hexagonal-grid li.hexagon a div.hexagon span.title {
+    visibility: visible;
+}
+.block_myoverview_enva ul.hexagonal-grid li.hexagon a:hover div.hexagon span.title {
+    visibility: hidden;
+}
+
+/* Course progress */
+.block_myoverview_enva ul.hexagonal-grid li.hexagon div.hexagon div.hexagon-progress {
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    background: black;
+    opacity: 0.4;
+}
+.block_myoverview_enva ul.hexagonal-grid li.hexagon div.hexagon div.progress-display {
+    max-width: 50%;
+    font-size: xx-small;
+    overflow: hidden;
+    position: absolute;
+    bottom: 3em;
+    left: 50%;
+    transform: rotate(-30deg);
+    font-weight: bolder;
+    color:white;
+    text-shadow: 1px 1px #000000;
 }
