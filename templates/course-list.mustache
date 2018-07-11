@@ -29,6 +29,7 @@
                  "progress": 60,
                  "hasstarted": true,
                  "tobereviewed": true,
+                 "score": 0.4
                  "visible": true
             },
             {
@@ -38,6 +39,7 @@
                  "progress": 60
                  "hasstarted": true,
                  "tobereviewed": false,
+                 "score": 1
                  "visible": true
             }
         ]
@@ -47,7 +49,7 @@
     <ul class="hexagonal-grid">
         {{#courses}}
             <li class="hexagon"
-                id="course-info-exa-{{id}}">
+                id="course-info-exa-{{id}}" data-score="{{ score }}">
                 <a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">
                     <div class="hexagon{{#tobereviewed}} recommended{{/tobereviewed}}{{#completed}} completed{{/completed}}">
                         <div class="hexagon-progress" style="width:{{progress}}%"></div>

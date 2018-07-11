@@ -109,10 +109,11 @@ class ordered_course_list implements renderable, templatable {
         $selectioncourse = null;
         foreach ($courselist as $c) {
             if ($c->id != $selectioncourseid) {
-                $this->set_course_data($c, $c->progress > 0, ($c->score < $this->reviewthreshold));
+                $this->set_course_data($c, $c->progress > 0, $c->score);
+                // TODO Check if equal or equal/less than equal
                 $courselistarray[] = (array)$c;
             } else {
-                $this->set_course_data($c, true, false);
+                $this->set_course_data($c); // Not to be reviewed
                 $selectioncourse = $c;
             }
         }
@@ -120,11 +121,16 @@ class ordered_course_list implements renderable, templatable {
         return array('courses' => $courselistarray);
     }
     
-    protected function set_course_data(&$c, $hasstarted, $tobereviewed, $hide = false) {
+    protected function set_course_data(&$c, $hasstarted=true, $score=null, $hide=false) {
         global $CFG;
         $c->viewurl = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $c->id));
         $c->hasstarted = $hasstarted;
-        $c->tobereviewed = $tobereviewed;
+        $c->tobereviewed = false;
+        $c->score = 1.0;
+        if (!is_null($score)) {
+            $c->tobereviewed = ($score < $this->reviewthreshold);
+            $c->score = $score;
+        }
         $c->summary = html_to_text(format_text($c->summary ,$c->format ));
         $c->progress = is_null($c->progress)?0:$c->progress;
         if ($hide) {
