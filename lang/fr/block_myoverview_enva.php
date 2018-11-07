@@ -35,3 +35,6 @@ $string['launchcourse:first'] = 'Démarrer';
 // Settings
 $string['reviewthreshold'] = 'Seuil des notes pour révision';
 $string['reviewthreshold:help'] = 'Seuil (entre 0 et 1) qui permet de distinguer les cours à revoir ou non';
+
+// Other
+$string['courseicon'] = 'Icône du cours';

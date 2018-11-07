@@ -29,18 +29,20 @@
                  "progress": 60,
                  "hasstarted": true,
                  "tobereviewed": true,
-                 "score": 0.4
-                 "visible": true
+                 "score": 0.4,
+                 "visible": true,
+                 "icon": pix icon for the course (deduced from the course tag)
             },
             {
                  "fullname": "My test course fullname 2",
                  "summary": "Sumary text goes here...",
-                 "viewurl": "http://xxx/course/view.php?id=courseid"
-                 "progress": 60
+                 "viewurl": "http://xxx/course/view.php?id=courseid",
+                 "progress": 60,
                  "hasstarted": true,
                  "tobereviewed": false,
-                 "score": 1
-                 "visible": true
+                 "score": 1,
+                 "visible": true,
+                 "icon": pix icon for the course (deduced from the course tag)
             }
         ]
     }
@@ -51,7 +53,16 @@
             <li class="hexagon"
                 id="course-info-exa-{{id}}" data-score="{{ score }}">
                 <a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">
-                    <div class="hexagon{{#tobereviewed}} recommended{{/tobereviewed}}{{#completed}} completed{{/completed}}">
+                    <div class="hexagon {{#completed}} completed{{/completed}}">
+
+                        {{#icon}}
+                            <img {{#attributes}}{{name}}="{{value}}"{{/attributes}} class="{{extraclasses}}"/>
+                        {{/icon}}
+
+                        {{#tobereviewed}}
+                            <div class="reviewicon">
+                            </div>
+                        {{/tobereviewed}}
                         <div class="hexagon-progress" style="width:{{progress}}%"></div>
                         <span class="title">{{{fullname}}}</span>
                         <p class="text-muted summary">

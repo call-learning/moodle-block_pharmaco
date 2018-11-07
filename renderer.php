@@ -109,11 +109,11 @@ class ordered_course_list implements renderable, templatable {
         $selectioncourse = null;
         foreach ($courselist as $c) {
             if ($c->id != $selectioncourseid) {
-                $this->set_course_data($c, $c->progress > 0, $c->score);
+                $this->set_course_data($c, $output,$c->progress > 0, $c->score);
                 // TODO Check if equal or equal/less than equal
                 $courselistarray[] = (array)$c;
             } else {
-                $this->set_course_data($c); // Not to be reviewed
+                $this->set_course_data($c, $output); // Not to be reviewed
                 $selectioncourse = $c;
             }
         }
@@ -121,8 +121,8 @@ class ordered_course_list implements renderable, templatable {
         return array('courses' => $courselistarray);
     }
     
-    protected function set_course_data(&$c, $hasstarted=true, $score=null, $hide=false) {
-        global $CFG;
+    protected function set_course_data(&$c, $output, $hasstarted=true, $score=null, $hide=false) {
+        global $CFG, $OUTPUT;
         $c->viewurl = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $c->id));
         $c->hasstarted = $hasstarted;
         $c->tobereviewed = false;
@@ -136,5 +136,21 @@ class ordered_course_list implements renderable, templatable {
         if ($hide) {
             $c->visible = false;
         }
+        if ($c->tags) {
+            $icontag = 'default';
+            foreach($c->tags as $t) {
+                $tname = $t->rawname;
+                if ($tname != \local_enva\helper::get_external_course_tag_name()) {
+                    $tname = trim($tname);
+                    $icontag = \local_enva\helper::remove_accents($tname);
+                }
+            }
+        }
+        $pix = new pix_icon($icontag,
+            get_string('courseicon','block_myoverview_enva'),
+            'block_myoverview_enva',
+            array('class'=>'courseicon')
+        );
+        $c->icon = $pix->export_for_template($output);
     }
 }

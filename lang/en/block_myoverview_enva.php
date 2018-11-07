@@ -35,3 +35,7 @@ $string['launchcourse:first'] = 'Start';
 // Settings
 $string['reviewthreshold'] = 'Grade review threshold';
 $string['reviewthreshold:help'] = 'Threshold (between 0 and 1) to mark a course a to be reviewed';
+
+
+// Other
+$string['courseicon'] = 'Course Icon';
