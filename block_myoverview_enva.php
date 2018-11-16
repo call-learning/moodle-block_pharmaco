@@ -84,8 +84,9 @@ class block_myoverview_enva extends block_myoverview {
             $this->content->text =  $renderer->render($tcp);
         } else {
             $reviewthreshold = block_myoverview_enva::$DEFAULT_REVIEW_THRESHOLD;
-            if (isset($this->config->review_threshold)) {
-                $reviewthreshold = $this->config->review_threshold;
+            $config = get_config('block_myoverview_enva');
+            if (isset($config->review_threshold)) {
+                $reviewthreshold = $config->review_threshold;
             }
             $ocl = new ordered_course_list($USER->id, $reviewthreshold);
             $this->content->text =  $renderer->render($ocl);
