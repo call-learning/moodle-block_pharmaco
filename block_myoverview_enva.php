@@ -52,15 +52,10 @@ class block_myoverview_enva extends block_myoverview {
      */
     public function get_content() {
         global $USER, $CFG, $DB;
-/*        if ($this->content !== null) {
+        if ($this->content !== null) {
             return $this->content;
         }
-
-        if (empty($this->instance)) {
-            $this->content = '';
-            return $this->content;
-        }
-  */
+        
         $is_external = \local_enva\helper::is_user_external_role($USER->id);
         if (!$is_external) {
             return parent::get_content();

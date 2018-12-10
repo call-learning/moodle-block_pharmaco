@@ -136,21 +136,35 @@ class ordered_course_list implements renderable, templatable {
         if ($hide) {
             $c->visible = false;
         }
-        if ($c->tags) {
-            $icontag = 'default';
-            foreach($c->tags as $t) {
-                $tname = $t->rawname;
-                if ($tname != \local_enva\helper::get_external_course_tag_name()) {
-                    $tname = trim($tname);
-                    $icontag = \local_enva\helper::remove_accents($tname);
-                }
-            }
+        $cil = new course_in_list($c);
+        $coursefiles = $cil->get_course_overviewfiles();
+        $iconsrc = '';
+        if (empty($coursefiles))  {
+            $pix = new pix_icon('default',
+                get_string('courseicon','block_myoverview_enva'),
+                'block_myoverview_enva',
+                array('class'=>'courseicon')
+            );
+            $iconsrc = $pix->export_for_template($output);
+        } else {
+            $file = reset($coursefiles);
+            $src = moodle_url::make_pluginfile_url(
+                $file->get_contextid(),
+                $file->get_component(),
+                $file->get_filearea(),
+                null,
+                $file->get_filepath(),
+                $file->get_filename(),
+                false
+            );
+            $iconsrc = array(
+                'attributes' => array(
+                    array('name'=>'src','value'=>$src->out()),
+                    array('name'=>'title', 'value'=> get_string('courseicon','block_myoverview_enva')),
+                ),
+                'extraclasses' => 'courseicon'
+            );
         }
-        $pix = new pix_icon($icontag,
-            get_string('courseicon','block_myoverview_enva'),
-            'block_myoverview_enva',
-            array('class'=>'courseicon')
-        );
-        $c->icon = $pix->export_for_template($output);
+        $c->icon = $iconsrc;
     }
 }
