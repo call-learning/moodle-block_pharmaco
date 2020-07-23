@@ -1,12 +1,12 @@
 @block @block_login
 Feature: Login from a block
-    In order to make it easier to login
-    As an user
-    In need to login through a block
+  In order to make it easier to login
+  As an user
+  In need to login through a block
 
   Background:
     Given the following "users" exist:
-      | username | password | firstname | lastname | email |
+      | username | password | firstname | lastname | email                |
       | testuser | testpass | Test      | User     | student1@example.com |
     And I log in as "admin"
     And I am on site homepage

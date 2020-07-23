@@ -1,13 +1,17 @@
-# Extened Course overview #
+# Extended Course overview #
 
-Ce bloc permet d'afficher un tableau de bord différent pour les utilisateur ayant le rôle 'external' (voir module local/enva).
+https://travis-ci.org/call-learning/moodle-block_pharmaco.svg?branch=master
+
+Ce bloc permet d'afficher un tableau de bord différent pour les utilisateur ayant le rôle 'external' (voir module local/pharmaco).
 
 * Les cours sont affichés dans l’ordre habituel sauf pour le cours de test qui est à la fin
 * Les cours dont les résultats aux tests ne sont pas suffisant on un icône avec un crayon au dessus.
-* Les images des icônes de cours sont distribués en fonction du tag du cours (par exemple si le cours a le tag ‘stupéfiant’, on prendra l’icône stupefiant.png (qui est situé dans le block/overview_enva/pix et peut-être changé dans le thème).
+* Les images des icônes de cours sont distribués en fonction du tag du cours (par exemple si le cours a le tag ‘stupéfiant’, on prendra l’icône stupefiant.png (qui est situé dans 
+le block/pharmaco/pix et peut-être changé dans le thème).
 * Lorsque l’utilisateur n’a pas fini le cours de test, seul un lien vers le cours de test est proposé suggérant de compléter le cours pour voir le programme en entier.
 
-Ce bloc est dépendant du module local 'enva'
+Ce bloc est dépendant du module local 'pharmaco'
+
 ## License ##
 
 2018 Laurent David <laurent@call-learning.fr>

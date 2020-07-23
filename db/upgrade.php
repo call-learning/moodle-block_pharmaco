@@ -17,7 +17,7 @@
 /**
  * Plugin upgrade steps are defined here.
  *
- * @package     block_myoverview_enva
+ * @package     block_pharmaco
  * @category    upgrade
  * @copyright   2018 Laurent David <laurent@call-learning.fr>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,22 +26,22 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Execute block_myoverview_enva upgrade from the given old version.
+ * Execute block_pharmaco upgrade from the given old version.
  *
  * @param int $oldversion
  * @return bool
  */
-function xmldb_block_myoverview_enva_upgrade($oldversion) {
+function xmldb_block_pharmaco_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager();
 
     // For further information please read the Upgrade API documentation:
-    // https://docs.moodle.org/dev/Upgrade_API
+    // https://docs.moodle.org/dev/Upgrade_API.
     //
     // You will also have to create the db/install.xml file by using the XMLDB Editor.
     // Documentation for the XMLDB Editor can be found at:
-    // https://docs.moodle.org/dev/XMLDB_editor
+    // https://docs.moodle.org/dev/XMLDB_editor.
 
     return true;
 }

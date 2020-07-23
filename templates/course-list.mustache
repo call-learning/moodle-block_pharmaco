@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template block_myoverview_enva/course-list
+    @template block_pharmaco/course-list
 
     This template renders the list of courses
 
@@ -47,7 +47,7 @@
         ]
     }
 }}
-<div id="block-myoverview-enva-{{uniqid}}" class="block-myoverview-enva" data-region="myoverview-enva">
+<div id="block-pharmaco-{{uniqid}}" class="block-pharmaco" data-region="pharmaco">
     <ul class="hexagonal-grid">
         {{#courses}}
             <li class="hexagon"
@@ -69,7 +69,7 @@
                             {{#shortentext}} 100, {{summary}}{{/shortentext}}
                         </p>
                         <div class="progress-display">
-                            {{#str}}progressmessage, block_myoverview_enva, {{progress}} {{/str}}</div>
+                            {{#str}}progressmessage, block_pharmaco, {{progress}} {{/str}}</div>
                     </div>
                 </a>
             </li>

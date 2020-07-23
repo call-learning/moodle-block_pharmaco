@@ -17,7 +17,7 @@
 /**
  * Code to be executed after the plugin's database scheme has been installed is defined here.
  *
- * @package     block_myoverview_enva
+ * @package     block_pharmaco
  * @category    upgrade
  * @copyright   2018 Laurent David <laurent@call-learning.fr>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Custom code to be run on installing the plugin.
  */
-function xmldb_block_myoverview_enva_install() {
+function xmldb_block_pharmaco_install() {
 
     return true;
 }

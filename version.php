@@ -17,19 +17,19 @@
 /**
  * Plugin version and other meta-data are defined here.
  *
- * @package     block_myoverview_enva
+ * @package     block_pharmaco
  * @copyright   2018 Laurent David <laurent@call-learning.fr>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_myoverview_enva';
+$plugin->component = 'block_pharmaco';
 $plugin->release = '0.1.0';
 $plugin->version = 2018062801;
 $plugin->requires = 2017051503;
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->dependencies = array(
-    'block_myoverview' => ANY_VERSION, // Because we inherit from this block
-    'local_enva' => ANY_VERSION  // Because we use the classes defined here
+    'block_myoverview' => ANY_VERSION, // Because we inherit from this block.
+    'local_pharmaco' => ANY_VERSION  // Because we use the classes defined here.
 );

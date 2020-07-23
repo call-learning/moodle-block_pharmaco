@@ -17,8 +17,7 @@
 /**
  * Plugin administration pages are defined here.
  *
- * @package     block_myoverview_enva
- * @category    admin
+ * @package     block_pharmaco
  * @copyright   2018 Laurent David <laurent@call-learning.fr>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,6 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
-    $settings->add(new admin_setting_configtext('block_myoverview_enva/review_threshold', get_string('reviewthreshold', 'block_myoverview_enva'),
-        get_string('reviewthreshold:help', 'block_myoverview_enva'), 0.5, PARAM_FLOAT, 1.0));
+    $settings->add(
+        new admin_setting_configtext('block_pharmaco/review_threshold',
+            get_string('reviewthreshold', 'block_pharmaco'),
+            get_string('reviewthreshold:help', 'block_pharmaco'), 0.5, PARAM_FLOAT, 1.0));
 }

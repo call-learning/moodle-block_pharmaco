@@ -15,31 +15,26 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Form for editing myoverview_enva block instances.
+ * Plugin strings are defined here.
  *
- * @package     block_myoverview_enva
+ * @package     block_pharmaco
+ * @category    string
  * @copyright   2018 Laurent David <laurent@call-learning.fr>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/**
- * Form for editing block_myoverview_enva block instances.
- *
- * @package    block_myoverview_enva
- * @copyright  2018 Laurent David <laurent@call-learning.fr>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-class block_myoverview_enva_edit_form extends block_edit_form {
+defined('MOODLE_INTERNAL') || die();
 
-    /**
-     * Extends the configuration form for block_myoverview_enva.
-     */
-    protected function specific_definition($mform) {
+$string['pluginname'] = 'Vue d\'Ensemble des cours (PHARMACO)';
+$string['testcourseneedscompletion'] = 'Le cours \'{$a}\' doit être complété afin d\'être inscrit au programme complet';
+$string['progressmessage'] = '{$a}% complété';
 
-        // Section header title.
-        $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
+$string['launchcourse:started'] = 'Continuer';
+$string['launchcourse:first'] = 'Démarrer';
 
-        // Please keep in mind that all elements defined here must start with 'config_'.
+// Settings.
+$string['reviewthreshold'] = 'Seuil des notes pour révision';
+$string['reviewthreshold:help'] = 'Seuil (entre 0 et 1) qui permet de distinguer les cours à revoir ou non';
 
-    }
-}
+// Other.
+$string['courseicon'] = 'Icône du cours';

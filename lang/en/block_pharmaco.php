@@ -17,7 +17,7 @@
 /**
  * Plugin strings are defined here.
  *
- * @package     block_myoverview_enva
+ * @package     block_pharmaco
  * @category    string
  * @copyright   2018 Laurent David <laurent@call-learning.fr>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,17 +25,16 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Extended Course overview';
+$string['pluginname'] = 'Course Overview (Pharmaco)';
 $string['testcourseneedscompletion'] = 'The course \'{$a}\' needs to be completed in order to be registered
 to the full program.';
 $string['progressmessage'] = '{$a}% completed';
 $string['launchcourse:started'] = 'Continue';
 $string['launchcourse:first'] = 'Start';
 
-// Settings
+// Settings.
 $string['reviewthreshold'] = 'Grade review threshold';
 $string['reviewthreshold:help'] = 'Threshold (between 0 and 1) to mark a course a to be reviewed';
 
-
-// Other
+// Other.
 $string['courseicon'] = 'Course Icon';
