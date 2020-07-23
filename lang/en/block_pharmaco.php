@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Pharmaco';
 $string['blocktitle'] = 'Pharmacovigilance';
 $string['testcourseneedscompletion'] = 'The course \'{$a}\' needs to be completed in order to be registered
-to the full program.';
+ to the full program.';
 $string['progressmessage'] = '{$a}% completed';
 $string['launchcourse:started'] = 'Continue';
 $string['launchcourse:first'] = 'Start';

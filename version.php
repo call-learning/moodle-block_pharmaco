@@ -26,10 +26,9 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_pharmaco';
 $plugin->release = '0.1.0';
-$plugin->version = 2018062801;
-$plugin->requires = 2017051503;
+$plugin->version = 2020072301;
+$plugin->requires = 2019111804.00;
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->dependencies = array(
-    'block_myoverview' => ANY_VERSION, // Because we inherit from this block.
     'local_pharmaco' => ANY_VERSION  // Because we use the classes defined here.
 );
