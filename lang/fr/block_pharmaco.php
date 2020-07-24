@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Pharmaco';
+$string['pluginname'] = 'Pharmacie';
 $string['blocktitle'] = 'Pharmacovigilance';
 $string['testcourseneedscompletion'] = 'Le cours \'{$a}\' doit être complété afin d\'être inscrit au programme complet';
 $string['progressmessage'] = '{$a}% complété';

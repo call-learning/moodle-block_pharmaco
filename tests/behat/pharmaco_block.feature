@@ -11,26 +11,30 @@ Feature: The block pharmaco allows to show relevant courses to the user or promp
       | user     | role         | contextlevel | reference |
       | student1 | PHARMACO-EXT | System       |           |
     And the following "tags" exist:
-      | name         | isstandard |
-      | delivrance   | 1          |
-      | prescription | 1          |
-      | stock        | 1          |
-      | observance   | 1          |
+      | name            | isstandard |
+      | delivrance      | 1          |
+      | prescription    | 1          |
+      | stock           | 1          |
+      | observance      | 1          |
     And the following "courses" exist:
-      | fullname                | shortname | tags                                   |
-      | Quotient Pharmaceutique | CQ        | external_course,quotient_pharmacetique |
-      | Course 2                | C2        | delivrance                             |
-      | Course 3                | C3        | observance                             |
-      | Course 4                | C4        | stock                                  |
-      | Course 5                | C5        | prescription                           |
+      | fullname                | shortname | tags                                   | enablecompletion |
+      | Quotient Pharmaceutique | CQ        | external_course,quotient_pharmacetique | 1                |
+      | Course 2                | C2        | external_course,delivrance             | 1                |
+      | Course 3                | C3        | external_course,observance             | 1                |
+      | Course 4                | C4        | external_course,stock                  | 1                |
+      | Course 5                | C5        | external_course, prescription          | 1                |
     And I set the entry course to "CQ"
     And the following "question categories" exist:
       | contextlevel | reference | name           |
       | Course       | CQ        | Test questions |
     And the following "questions" exist:
-      | questioncategory | qtype       | name             | template    | questiontext | tags       |
-      | Test questions   | multichoice | Multi-choice-001 | one_of_four | Question One | delivrance |
-      | Test questions   | multichoice | Multi-choice-002 | one_of_four | Question Two | stock      |
+      | questioncategory | qtype       | name             | template    | questiontext |
+      | Test questions   | multichoice | Multi-choice-001 | one_of_four | Question One |
+      | Test questions   | multichoice | Multi-choice-002 | one_of_four | Question Two |
+    And the following "core_question > Tags" exist:
+      | question         | tag        |
+      | Multi-choice-001 | delivrance |
+      | Multi-choice-002 | stock      |
     And the following "activities" exist:
       | activity | name   | intro         | course | idnumber | preferredbehaviour | canredoquestions | completion | completionusegrade |
       | quiz     | Quiz 1 | Quiz Pharmaco | CQ     | quiz1    | immediatefeedback  | 1                | 2          | 1                  |
@@ -52,17 +56,16 @@ Feature: The block pharmaco allows to show relevant courses to the user or promp
     Then "Pharmacovigilance" "block" should not exist
     Then I log out
 
-  @run_only
   Scenario: As a user who been set to the "External Role", I should be able to start the quiz
-    # Enable completion in the course first
+    # Make sure that the quiz is set to complete the course
     Given I log in as "admin"
-    And I am on "Quotient Pharmaceutique" course homepage with editing mode on
-    And I navigate to "Edit settings" in current page administration
+    And I am on "Quotient Pharmaceutique" course homepage
+    And I navigate to "Course completion" in current page administration
+    And I expand all fieldsets
     And I set the following fields to these values:
-      | Enable completion tracking | Yes |
-    And I press "Save and display"
+      | Quiz - Quiz 1 | 1 |
+    And I click on "Save changes" "button"
     And I log out
-    # Then do the quiz
     Given I log in as "student1"
     Then I should see "Start" in the "Pharmacovigilance" "block"
     Then I click on "Start" "link" in the "Pharmacovigilance" "block"
@@ -76,8 +79,20 @@ Feature: The block pharmaco allows to show relevant courses to the user or promp
     And I click on "Finish attempt ..." "button"
     And I press "Submit all and finish"
     And I click on "Submit all and finish" "button" in the "Confirmation" "dialogue"
-    And I log out
-    And I trigger cron
-    And I log in as "student1"
-    Then I pause scenario execution
+    # Running completion task just after clicking sometimes fail, as record
+    # should be created before the task runs.
+    And I run the scheduled task "core\task\completion_regular_task"
+    And I wait "1" seconds
+    And I run the scheduled task "core\task\completion_regular_task"
+    # This is due to a bug in the completion (completion_regular_task)
+    # If the reaggregation has been done in the same cron, then the time is
+    # the same and reaggregate == time(), so the course is not marked complete
     Then I log out
+    And I trigger cron
+    # We need to logout in between
+    Given I log in as "student1"
+    Then I should see "Pharmacovigilance"
+    And I should see "Course 2"
+    And I should see "Course 3"
+    And I should see "Course 4"
+    And I should see "Course 5"
